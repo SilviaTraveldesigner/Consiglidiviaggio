@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consigli di Viaggio - Silvia Travel Designer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: #f8f8f8;
+            color: #1a1a1a;
+            line-height: 1.7;
+        }
+        
+        .section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 54px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1rem;
+            color: #43899d;
+            letter-spacing: -0.5px;
+        }
+        
+        .section-subtitle {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 16px;
+            font-weight: 400;
+            text-align: center;
+            color: #666;
+            margin-bottom: 3.5rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .advice-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 2rem;
+            border-left: 5px solid #ffcf00;
+            animation: fadeInUp 0.6s ease-out forwards;
+            opacity: 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .advice-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+        }
+        
+        .advice-card:nth-child(1) { animation-delay: 0.1s; }
+        .advice-card:nth-child(2) { animation-delay: 0.15s; }
+        .advice-card:nth-child(3) { animation-delay: 0.2s; }
+        .advice-card:nth-child(4) { animation-delay: 0.25s; }
+        .advice-card:nth-child(5) { animation-delay: 0.3s; }
+        .advice-card:nth-child(6) { animation-delay: 0.35s; }
+        .advice-card:nth-child(7) { animation-delay: 0.4s; }
+        .advice-card:nth-child(8) { animation-delay: 0.45s; }
+        .advice-card:nth-child(9) { animation-delay: 0.5s; }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .advice-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: #43899d;
+            margin-bottom: 1rem;
+            line-height: 1.4;
+        }
+        
+        .advice-excerpt {
+            font-size: 16px;
+            color: #1a1a1a;
+            line-height: 1.7;
+            font-weight: 400;
+            margin-bottom: 1.5rem;
+        }
+        
+        .advice-cta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            color: #ffcf00;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: none;
+            border: none;
+            padding: 0;
+        }
+        
+        .advice-cta:hover {
+            color: #43899d;
+        }
+        
+        .toggle-icon {
+            display: inline-block;
+            transition: transform 0.3s ease;
+            font-size: 12px;
+        }
+        
+        .advice-card.expanded .toggle-icon {
+            transform: rotate(180deg);
+        }
+        
+        .advice-full {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+            opacity: 0;
+        }
+        
+        .advice-card.expanded .advice-full {
+            max-height: 3000px;
+            opacity: 1;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #f0f0f0;
+        }
+        
+        .advice-full-text {
+            font-size: 16px;
+            color: #1a1a1a;
+            line-height: 1.8;
+            font-weight: 400;
+        }
+        
+        .advice-full-text p {
+            margin-bottom: 1rem;
+        }
+        
+        .advice-full-text p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .contact-section {
+            background: #fff;
+            border-radius: 12px;
+            padding: 3rem 2rem;
+            border-left: 5px solid #43899d;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            max-width: 700px;
+            margin: 3rem auto;
+            text-align: center;
+        }
+        
+        .contact-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: #43899d;
+            margin-bottom: 1rem;
+        }
+        
+        .contact-text {
+            font-size: 16px;
+            color: #1a1a1a;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+        
+        .contact-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: center;
+        }
+        
+        .contact-button {
+            display: inline-block;
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+        
+        .button-primary {
+            background: #ffcf00;
+            color: #43899d;
+        }
+        
+        .button-primary:hover {
+            background: #43899d;
+            color: #ffcf00;
+        }
+        
+        .button-secondary {
+            background: #43899d;
+            color: #fff;
+        }
+        
+        .button-secondary:hover {
+            background: #ffcf00;
+            color: #43899d;
+        }
+        
+        @media (max-width: 768px) {
+            .section {
+                padding: 2.5rem 1.5rem;
+            }
+            
+            .section-title {
+                font-size: 40px;
+                margin-bottom: 1rem;
+            }
+            
+            .section-subtitle {
+                font-size: 14px;
+                margin-bottom: 2.5rem;
+            }
+            
+            .cards-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .advice-title {
+                font-size: 18px;
+            }
+            
+            .advice-excerpt {
+                font-size: 15px;
+            }
+            
+            .contact-section {
+                padding: 2rem 1.5rem;
+            }
+            
+            .contact-title {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="section">
+        <h2 class="section-title">Consigli di viaggio</h2>
+        <p class="section-subtitle">Articoli e guide per prepararvi al meglio, senza sorprese. Dalla scelta della destinazione alle polizze assicurative, tutto quello che serve sapere.</p>
+        
+        <div class="cards-grid">
+            <div class="advice-card">
+                <h3 class="advice-title">Come scegliere la destinazione giusta per la vostra luna di miele</h3>
+                <p class="advice-excerpt">La destinazione perfetta non esiste in assoluto — esiste per voi. Quando una coppia mi contatta, non chiedo subito "dove volete andare". Chiedo "chi siete voi? Come amate stare insieme?"...</p>
+                <button class="advice-cta toggle-btn"><span class="toggle-icon">▼</span> Leggi il consiglio completo</button>
+                <div class="advice-full">
+                    <div class="advice-full-text">
+                        <p>La destinazione non la sceglie Google, la sceglie il vostro cuore. So che sembra romantico, ma è vero. Quando una coppia mi contatta, non chiedo subito "dove volete andare". Chiedo "chi siete voi? Come amate stare insieme?" Perché la destinazione perfetta non esiste in assoluto — esiste per voi.</p>
+                        <p>Ci sono coppie che sognano il safari al tramonto, altre che vogliono staccare completamente dal mondo in un'isola privata. Alcune cercano cultura, storia, città da scoprire. Altre vogliono avventura, adrenalina, sfide. E va bene tutto — ma deve essere vostro.</p>
+                        <p>Quello che ho imparato in 24 anni è che molti scelgono la destinazione per la foto da postare su Instagram, non per come si sentiranno lì. Poi, una volta arrivati, si rendono conto che non era quello che volevano. Allora vi parlo di come leggere veramente i vostri desideri — non quelli che credete di avere, quelli veri.</p>
+                        <p>Chiedete a voi stessi: preferite il movimento o il fermo? Volete immergervi nella cultura locale o mantenere distanza? Cercate lusso o semplicità? Adrenalina o relax? E quanto tempo avete? Due settimane cambiano tutto.</p>
+                        <p>La destinazione giusta per voi è quella che vi fa sentire a casa, pur essendo lontani da casa. È quella dove il tempo rallenta naturalmente. È il posto dove guardate il tramonto e vi prendete per mano senza dire nulla, perché il momento dice tutto.</p>
+                        <p>Vi aiuto a trovarla, senza romanticherie vuote.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="advice-card">
+                <h3 class="advice-title">Luna di miele all'avventura: safari, escursioni e emozioni forti</h3>
+                <p class="advice-excerpt">Un safari non è solo stare seduti in una jeep con i binocoli. È incontrare il Serengeti al tramonto e capire che siete minuscoli, eppure parte di qualcosa di immenso...</p>
+                <button class="advice-cta toggle-btn"><span class="toggle-icon">▼</span> Leggi il consiglio completo</button>
+                <div class="advice-full">
+                    <div class="advice-full-text">
+                        <p>Un safari non è solo stare seduti in una jeep con i binocoli. È incontrare il Serengeti al tramonto e capire che siete minuscoli, insignificanti, e allo stesso tempo parte di qualcosa di immenso. È sentire il rombo di un leone da lontano e stringervi la mano. È comprendere che esistono ancora posti dove il tempo non ha fretta.</p>
+                        <p>Ho visto coppie trasformarsi durante un safari. Arrivano con lo stress della città negli occhi. Dopo tre giorni, sorridono diversamente. Il safari non è una destinazione, è un'esperienza che vi cambia.</p>
+                        <p>Ma non tutti i safari sono uguali. Ci sono quelli di massa, dove siete in convoy con altre vinte jeep. Ci sono quelli privati, dove la guida sa dove trovare il leopardo. Ci sono quelli a piedi, dove camminate con un'altra prospettiva. Ci sono quelli nei piccoli accampamenti sotto le stelle, dove dormite con i suoni della savana che vi cullano.</p>
+                        <p>E poi ci sono le altre avventure — le escursioni che non trovate sui tour standard. Una camminata con la tribù Hadzabe, che vi insegna come vivere con quello che la natura vi dà. Una salita al cratere del Ngorongoro all'alba. Un'immersione in barriera corallina a Zanzibar dove vedete il mondo sottomarino come se fosse un film.</p>
+                        <p>L'avventura vera non è fare cose pericolose. È fare cose autentiche, con consapevolezza di ogni momento. È sporcarsi le mani, sentire il battito del cuore accelerare, scoprire di che pasta siete fatti come coppia.</p>
+                        <p>La mia expertise qui è non mettervi in situazioni dove vi sentite spaventati o scomodi — ma trovarvi il limite giusto dove il brivido vi eccita e vi unisce.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="advice-card">
+                <h3 class="advice-title">Budget e lusso: quanto investire davvero, senza sorprese</h3>
+                <p class="advice-excerpt">Una luna di miele non costa una cifra fissa — dipende da quando andate, dove, come vivete. Ma il lusso non è il prezzo più alto...</p>
+                <button class="advice-cta toggle-btn"><span class="toggle-icon">▼</span> Leggi il consiglio completo</button>
+                <div class="advice-full">
+                    <div class="advice-full-text">
+                        <p>Qui faccio chiarezza, perché il vostro denaro merita di essere speso bene. Una luna di miele non costa una cifra fissa — dipende da quando andate, dove, come vivete, quanto tempo avete. Ma soprattutto, dipende da cosa intendete per "lusso".</p>
+                        <p>Il lusso non è il prezzo più alto. È avere quello che serve, quando serve, nel modo che vi fa stare bene. Per alcuni, lusso è una camera d'albergo a cinque stelle dove non vi manca nulla. Per altri, è dormire in una capanna privata sulla spiaggia sotto le stelle. Per altri ancora, è avere una guida privata che conosce il posto come le sue tasche.</p>
+                        <p>Vi racconto trasparente: una luna di miele in Tanzania con safari e spiaggia costa diversamente da una in Giappone, che costa diversamente da una in Canada. Le stagioni cambiano i prezzi. Il periodo di prenotazione cambia i prezzi. La tipologia di struttura cambia completamente i prezzi.</p>
+                        <p>Quello che faccio è costruire un budget che sia sostenibile per voi e che non vi lasci sorprese a metà viaggio. Sapete esattamente cosa includerà il vostro preventivo, cosa no, dove potete risparmiare senza sacrificare emozione, dove investire per avere davvero la differenza.</p>
+                        <p>Non mi piacciono i clienti che scoprono a metà viaggio che mancava qualcosa. Preferisco sedermi con voi, capire il vostro numero, e dire: "Con questo budget, vi propongo questo. Se volete di più, aggiungiamo così. Se volete meno, togliamo quest'altro". Trasparenza totale.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="advice-card">
+                <h3 class="advice-title">Quando andare dove: la guida delle stagioni</h3>
+                <p class="advice-excerpt">Non esiste una stagione giusta per il mondo intero — dipende da che esperienza cercate. Il Serengeti ha momenti magici diversi durante l'anno...</p>
+                <button class="advice-cta toggle-btn"><span class="toggle-icon">▼</span> Leggi il consiglio completo</button>
+                <div class="advice-full">
+                    <div class="advice-full-text">
+                        <p>Una delle domande che ricevo di più è "quando dovremmo andare?" E la risposta è: dipende dove volete andare. Non esiste una stagione giusta per il mondo intero — dipende da che esperienza cercate.</p>
+                        <p>Il Serengeti ha momenti magici diversi durante l'anno. A gennaio vedete la grande migrazione di gnu. A giugno vedete i leoni che cacciano. In aprile la pioggia trasforma il paesaggio ma pochi turisti ci sono. Ogni mese ha il suo valore.</p>
+                        <p>Tanzania in generale è visitabile quasi tutto l'anno, ma la stagione secca (giugno-ottobre) è quella dei safari migliori perché gli animali si concentrano intorno all'acqua. Zanzibar invece è meglio quando le piogge sono minime — gennaio, febbraio, luglio, agosto, settembre.</p>
+                        <p>Giappone è bellissimo in primavera per i ciliegi, in autunno per i colori. Ma anche in inverno ha un fascino sobrio e tranquillo. Il Festival delle Lanterne in Thailandia avviene a novembre — se volete quello, dovete pianificare per allora.</p>
+                        <p>Il segreto è sapere che ogni meta ha il suo ritmo stagionale, e sincronizzare il vostro viaggio con quello che cercate. Un safari durante la migrazione è un'energia diversa da un safari durante la stagione secca. Una spiaggia caraibica a dicembre è diversa da una a giugno — il clima è uguale, ma il numero di persone cambia completamente.</p>
+                        <p>Io vi guido su questo. Conosco il migliore di ogni destinazione, e scelgo il momento che amplifica quello che volete vivere.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="advice-card">
+                <h3 class="advice-title">Documenti, visti, vaccini e pratiche: tutto quello che serve sapere</h3>
+                <p class="advice-excerpt">Non è romantico parlare di visti e vaccini, ma è necessario. Se lo fate male, rovinano tutto il viaggio...</p>
+                <button class="advice-cta toggle-btn"><span class="toggle-icon">▼</span> Leggi il consiglio completo</button>
+                <div class="advice-full">
+                    <div class="advice-full-text">
+                        <p>Non è romantico parlare di visti e vaccini, ma è necessario. E se lo fate male, rovinano tutto il viaggio. Così ve lo spiego chiaro.</p>
+                        <p>Ogni paese ha le sue regole. Alcuni accettano gli italiani senza visto, altri richiedono mesi di anticipo per ottenerlo. Alcuni richiedono certificati di vaccinazione specifici, altri no. I documenti hanno scadenze — il passaporto deve avere validità residua che dipende dal paese.</p>
+                        <p>Ad esempio, per la Tanzania vi serve il visto — ma potete farlo all'arrivo o richiedere un e-visto prima di partire. Il tempo dipende dalla stagione turistica. Per il Giappone il visto come italiani non è necessario per soggiorni brevi, ma i documenti devono essere in regola.</p>
+                        <p>I vaccini sono individuali — dipende da dove siete stati, dove andate, cosa date per scontato nel vostro corpo. La febbre gialla non sempre è obbligatoria, ma è consigliata per certi paesi. La malaria richiede profilassi. Questi non sono dettagli — vi permettono di godere il viaggio senza preoccupazioni.</p>
+                        <p>Quello che faccio è una checklist personalizzata per voi, per la vostra destinazione specifica, con tempi reali di ottenimento e tutto quello che dovete sapere. Non vi lascio sorprese all'ultimo minuto.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="advice-card">
+                <h3 class="advice-title">Honeymoon eco-consapevole: lusso responsabile</h3>
+                <p class="advice-excerpt">Un viaggio può essere lussuoso e responsabile allo stesso tempo. Non sono in contrasto. Quando viaggio con voi, vi porto in posti dove lo staff locale è pagato bene...</p>
+                <button class="advice-cta toggle-btn"><span class="toggle-icon">▼</span> Leggi il consiglio completo</button>
+                <div class="advice-full">
+                    <div class="advice-full-text">
+                        <p>Un viaggio può essere lussuoso e responsabile allo stesso tempo. Non sono in contrasto.</p>
+                        <p>Quando viaggio con voi, non vi porto in resort dove lo staff locale lavora 12 ore al giorno per stipendi che non permettono di vivere. Non vi propongo tour che sfruttano comunità locali per foto turistiche. Non vi faccio nuotare con animali in cattività. Non vi consiglio di comprare souvenir che danneggiano l'ecosistema.</p>
+                        <p>Il lusso vero, quello che rimane nel cuore, è esperienza consapevole. È mangiare il cibo locale non perché è trendy, ma perché conosco il ristorante dove cucinano bene e pagano bene il loro staff. È fare safari con guide locali che amano il loro lavoro e il loro territorio. È fare un'escursione con una comunità che beneficia davvero dai vostri soldi. È stare in resort che proteggono l'ecosistema, non lo sfruttano.</p>
+                        <p>Negli ultimi anni ho costruito partnership con DMC locali che condividono questa filosofia. Non sono gli operatori più grandi, ma sono i migliori — persone che amano il loro territorio e lo proteggono.</p>
+                        <p>Quando viaggio con me, il vostro lusso ha un peso positivo. Non è etico, è intelligente. Perché proteggiamo i posti che amiamo così rimangono belli anche per chi viene dopo.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="advice-card">
+                <h3 class="advice-title">Polizze assicurative: non partite senza protezione</h3>
+                <p class="advice-excerpt">Le polizze non sono carta che comprate e dimenticate. Sono il vostro salvavita quando qualcosa va storto. Ma non tutte le polizze sono uguali...</p>
+                <button class="advice-cta toggle-btn"><span class="toggle-icon">▼</span> Leggi il consiglio completo</button>
+                <div class="advice-full">
+                    <div class="advice-full-text">
+                        <p>Vi racconto una storia vera. Una coppia che avevo seguito partì per la Tanzania senza polizza medica. Il terzo giorno, uno dei due si ruppe un piede durante un'escursione. Ospedale locale, intervento, evacuazione medica verso Nairobi. Costo totale: 8.000 euro. Senza polizza, li avrebbe pagati di tasca loro.</p>
+                        <p>Le polizze non sono carta che comprate e dimenticate. Sono il vostro salvavita quando qualcosa va storto.</p>
+                        <p>Ma non tutte le polizze sono uguali. Ci sono quelle medico-bagaglio, obbligatorie. Ce ne sono altre che coprono annullamento viaggio (se vi succede qualcosa prima di partire, recuperate i soldi). Altre ancora coprono solo emergenze mediche. Altre coprono sport e attività avventurose — essenziale se fate safari o escursioni in montagna.</p>
+                        <p>Quando vi propongo un viaggio, vi spiego quale polizza serve davvero per quello che state facendo. Un safari in Tanzania richiede una polizza diversa da una spiaggia alle Maldive. Un viaggio in montagna in Cina richiede coperture diverse da un viaggio in città.</p>
+                        <p>Quello che vi dico sempre: leggete cosa copre, cosa non copre, quali sono i massimali. Non è noioso — è l'unica cosa che protegge il vostro investimento emotivo e economico.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="advice-card">
+                <h3 class="advice-title">eSIM e connettività: stare connessi in sicurezza</h3>
+                <p class="advice-excerpt">Le eSIM virtuali hanno cambiato il gioco. Installate direttamente nel telefono, vi permettono di stare connessi senza pagare tariffe folli...</p>
+                <button class="advice-cta toggle-btn"><span class="toggle-icon">▼</span> Leggi il consiglio completo</button>
+                <div class="advice-full">
+                    <div class="advice-full-text">
+                        <p>Quante volte vi siete trovati all'estero senza internet e vi è salito il panico? O avete pagato 50 euro per un pacchetto dati che vi ha lasciato al verde?</p>
+                        <p>Le eSIM virtuali hanno cambiato il gioco. Sono schede telefoniche digitali che installate direttamente nel telefono — se il vostro supporta eSIM, che ormai la maggior parte dei moderni supporta. Prima di partire, comprate l'eSIM per la vostra destinazione, la attivate, e siete già connessi senza cambiare fisicamente la scheda.</p>
+                        <p>Ci sono app come Airalo, Holafly, TravelSim che offrono eSIM per quasi ogni paese del mondo. Costi ragionevoli, connessione veloce, niente stress in aeroporto cercando una sim locale. È il contrasto totale con il roaming internazionale, che vi deruba.</p>
+                        <p>Ma la connettività è fondamentale per altro — le mappe. Quando siete in giro per la città o in una destinazione sconosciuta, Google Maps vi salva. Vi permette di orientarvi, trovare ristoranti, evitare zone poco sicure. Vi permette anche di condividere con gli amici dove siete, di contattare guide locali in caso di bisogno.</p>
+                        <p>Quello che consiglio: prima di partire, documentatevi sulla connettività dove andate. Se fate un safari nel mezzo della savana, la connessione non ci sarà comunque — ma nei villaggi, nelle città, negli alberghi, dovete poter contare su internet stabile.</p>
+                        <p>La mia consulenza include sempre una guida: quale eSIM comprare, quale app usare, come attivarla. Non vi lascio nell'incertezza su questi dettagli pratici.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="advice-card">
+                <h3 class="advice-title">Protezione totale: come valutare le polizze di viaggio</h3>
+                <p class="advice-excerpt">Molti comprano polizze senza sapere cosa copre. Poi succede qualcosa e scoprono che non è coperto. Vi racconto come leggere una polizza...</p>
+                <button class="advice-cta toggle-btn"><span class="toggle-icon">▼</span> Leggi il consiglio completo</button>
+                <div class="advice-full">
+                    <div class="advice-full-text">
+                        <p>Se penso alle polizze di viaggio in generale, quello che vedo è gente che le compra senza sapere cosa copre. Poi succede qualcosa, leggono le condizioni, e scoprono che non è coperto. Frustrazione, soldi persi, viaggio rovinato.</p>
+                        <p>Vi racconto come leggere una polizza senza perdervi.</p>
+                        <p>Una buona polizza di viaggio copre: emergenze mediche (questa è obbligatoria), bagaglio smarrito o danneggiato, annullamento viaggio (se vi succede qualcosa prima di partire), interruzione viaggio (se dovete tornare a casa prima), ritardo voli. Alcuni pacchetti aggiungono anche attività sportive, gravidanza, malattie preesistenti — dipende da voi.</p>
+                        <p>Quello che dovete guardare è il massimale di copertura. Se l'ospedale costa 10.000 euro e la polizza copre solo 5.000, voi pagate il resto. Se perdete il bagaglio da 3.000 euro e la polizza copre solo 500, vi serve un'altra polizza. I massimali devono essere allineati a quello che investite nel viaggio.</p>
+                        <p>Leggete anche le esclusioni — cosa non copre. Spesso non coprono cose che voi pensate siano coperte. Sport estremi, attività ad alto rischio, paesi in guerra — sono esclusi. Se fate un safari con rischi, dovete una polizza che copra "attività avventurose".</p>
+                        <p>Un'altra cosa importante: quando acquistate la polizza? Idealmente, subito dopo aver prenotato il volo. Perché se cancellate prima, la polizza di annullamento vi rimborsa. Se aspettate fino al giorno prima della partenza, è tardi.</p>
+                        <p>La mia expertise qui è darvi una checklist di cosa cercare, quale assicurazione scegliere in base al vostro viaggio specifico, e assicurarvi che quando partite, siete davvero protetti. Non voglio che scopriate a metà viaggio che vi manca una copertura fondamentale.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="section">
+        <div class="contact-section">
+            <h3 class="contact-title">Vuoi approfondire?</h3>
+            <p class="contact-text">Se avete piacere di ricevere altri consigli e informazioni, potete contattarmi. Approfondiremo il tutto insieme, risponderò alle vostre domande specifiche e vi guiderò verso la consulenza giusta per il vostro viaggio.</p>
+            <div class="contact-buttons">
+                <a href="https://calendly.com/silviadalabenetta" class="contact-button button-primary" target="_blank">Prenota una consulenza via Calendly</a>
+                <a href="mailto:silviadalabenetta@oceanya.it" class="contact-button button-secondary">Scrivimi via email</a>
+            </div>
+        </div>
+    </section>
+    
+    <script>
+        const cards = document.querySelectorAll('.advice-card');
+        
+        cards.forEach(card => {
+            const toggleBtn = card.querySelector('.toggle-btn');
+            
+            toggleBtn.addEventListener('click', () => {
+                card.classList.toggle('expanded');
+            });
+        });
+    </script>
+</body>
+</html>
